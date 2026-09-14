@@ -1,0 +1,144 @@
+{
+  "equipo": "Team Vikingo",
+  "actualizado": "2026-09-13",
+  "peleadores": [
+    {
+      "id": "fighter-001",
+      "nombre": "Carlos Alexander Arias Santos",
+      "apodo": "El Vikingo",
+      "cinturon": "Azul",
+      "peso": 82,
+      "edad": 27,
+      "victorias": 18,
+      "derrotas": 4,
+      "empates": 1,
+      "foto": "",
+      "puntosRanking": 980,
+      "tendencia": "same",
+      "estiloGrappling": "Híbrido",
+      "aniosTatami": 9,
+      "fraseGuerra": "Se gana o se aprende, nunca se pierde.",
+      "stats": {
+        "victoriasSumision": 11,
+        "victoriasPuntos": 7,
+        "efectividadPases": 74,
+        "defensaGeneral": 88
+      }
+    },
+    {
+      "id": "fighter-002",
+      "nombre": "Miguel Ángel Fernández Rosario",
+      "apodo": "El Martillo",
+      "cinturon": "Azul",
+      "peso": 90,
+      "edad": 24,
+      "victorias": 15,
+      "derrotas": 6,
+      "empates": 0,
+      "foto": "",
+      "puntosRanking": 860,
+      "tendencia": "up",
+      "estiloGrappling": "Pasador",
+      "aniosTatami": 6,
+      "fraseGuerra": "La presión revela el carácter.",
+      "stats": {
+        "victoriasSumision": 9,
+        "victoriasPuntos": 6,
+        "efectividadPases": 66,
+        "defensaGeneral": 79
+      }
+    },
+    {
+      "id": "fighter-003",
+      "nombre": "Luis Emilio Peña Contreras",
+      "apodo": "Serpiente",
+      "cinturon": "Blanca",
+      "peso": 76,
+      "edad": 21,
+      "victorias": 9,
+      "derrotas": 5,
+      "empates": 0,
+      "foto": "",
+      "puntosRanking": 540,
+      "tendencia": "up",
+      "estiloGrappling": "Guardero",
+      "aniosTatami": 2,
+      "fraseGuerra": "Paciencia en la guardia, precisión en el ataque.",
+      "stats": {
+        "victoriasSumision": 6,
+        "victoriasPuntos": 3,
+        "efectividadPases": 58,
+        "defensaGeneral": 70
+      }
+    },
+    {
+      "id": "fighter-004",
+      "nombre": "Andrés Felipe Mercado Duarte",
+      "apodo": "Relámpago",
+      "cinturon": "Blanca",
+      "peso": 70,
+      "edad": 19,
+      "victorias": 7,
+      "derrotas": 6,
+      "empates": 1,
+      "foto": "",
+      "puntosRanking": 410,
+      "tendencia": "down",
+      "estiloGrappling": "Híbrido",
+      "aniosTatami": 1,
+      "fraseGuerra": "Cada entrenamiento es una pelea ganada.",
+      "stats": {
+        "victoriasSumision": 4,
+        "victoriasPuntos": 3,
+        "efectividadPases": 49,
+        "defensaGeneral": 61
+      }
+    },
+    {
+      "id": "fighter-005",
+      "nombre": "José Ramón Batista Núñez",
+      "apodo": "El Muro",
+      "cinturon": "Negra",
+      "peso": 95,
+      "edad": 34,
+      "victorias": 29,
+      "derrotas": 5,
+      "empates": 2,
+      "foto": "",
+      "puntosRanking": 1200,
+      "tendencia": "same",
+      "estiloGrappling": "Pasador",
+      "aniosTatami": 16,
+      "fraseGuerra": "El tatami no miente.",
+      "stats": {
+        "victoriasSumision": 19,
+        "victoriasPuntos": 10,
+        "efectividadPases": 85,
+        "defensaGeneral": 93
+      }
+    },
+    {
+      "id": "fighter-006",
+      "nombre": "Daniel Esteban Guzmán Vargas",
+      "apodo": "Tiburón",
+      "cinturon": "Blanca",
+      "peso": 68,
+      "edad": 23,
+      "victorias": 5,
+      "derrotas": 7,
+      "empates": 0,
+      "foto": "",
+      "puntosRanking": 300,
+      "tendencia": "down",
+      "estiloGrappling": "Guardero",
+      "aniosTatami": 1,
+      "fraseGuerra": "Aprendo perdiendo, crezco insistiendo.",
+      "stats": {
+        "victoriasSumision": 3,
+        "victoriasPuntos": 2,
+        "efectividadPases": 41,
+        "defensaGeneral": 55
+      }
+    }
+  ]
+}

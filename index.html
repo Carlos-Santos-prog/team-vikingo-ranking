@@ -1,0 +1,1175 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>TEAM VIKINGO RANKINGS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   TEAM VIKINGO RANKINGS — hoja de estilos principal
+   Tema: "Fight Night" — negro profundo, rojo agresivo, blanco.
+   ============================================================ */
+:root{
+  --black-void:      #0a0a0a;
+  --black-panel:     #131313;
+  --black-card:      #1a1a1a;
+  --black-card-hi:   #202020;
+  --line:            #2a2a2a;
+  --red:             #e0141a;
+  --red-dim:         #8f0d11;
+  --red-glow:        rgba(224,20,26,0.35);
+  --green:           #2fbf5f;
+  --white:           #f2f2f0;
+  --gray:            #9a9a96;
+  --gray-dim:        #63625c;
+  --belt-blanco:     #f2f2f0;
+  --belt-azul:       #2b6fe0;
+  --belt-violeta:    #7c3fd6;
+  --belt-marron:     #7a4a26;
+  --belt-negro:      #111111;
+  --radius-sm: 3px;
+  --radius-md: 6px;
+  --font-display: 'Anton', 'Arial Narrow', sans-serif;
+  --font-body: 'Oswald', 'Arial Narrow', sans-serif;
+}
+
+*,*::before,*::after{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
+body{
+  margin:0;
+  background:var(--black-void);
+  color:var(--white);
+  font-family:var(--font-body);
+  -webkit-font-smoothing:antialiased;
+  min-height:100vh;
+}
+img{ max-width:100%; display:block; }
+button{ font-family:inherit; cursor:pointer; }
+a{ color:inherit; text-decoration:none; }
+input,select,textarea{ font-family:inherit; }
+::selection{ background:var(--red); color:var(--white); }
+@media (prefers-reduced-motion: reduce){
+  *{ animation-duration:0.001ms !important; transition-duration:0.001ms !important; }
+}
+:focus-visible{ outline:2px solid var(--red); outline-offset:2px; }
+.hidden{ display:none !important; }
+.container{ max-width:1180px; margin:0 auto; padding:0 24px; }
+
+/* ============================================================
+   PANTALLA DE LOGIN (inmersiva)
+   ============================================================ */
+#login-screen{
+  position:fixed; inset:0; z-index:500;
+  display:flex; align-items:center; justify-content:center;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(224,20,26,0.14), transparent 55%),
+    radial-gradient(ellipse at 15% 100%, rgba(224,20,26,0.08), transparent 50%),
+    var(--black-void);
+  padding:24px;
+}
+.login-box{
+  width:100%; max-width:400px;
+  text-align:center;
+}
+.login-mark{
+  width:64px; height:64px;
+  margin:0 auto 18px;
+  background:var(--red);
+  clip-path:polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  display:flex; align-items:center; justify-content:center;
+  font-family:var(--font-display);
+  font-size:30px;
+}
+.login-title{
+  font-family:var(--font-display);
+  font-size:clamp(34px, 8vw, 48px);
+  letter-spacing:1px;
+  line-height:0.95;
+  margin:0 0 4px;
+}
+.login-title span{ color:var(--red); }
+.login-subtitle{
+  font-size:12px;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  color:var(--gray);
+  margin:0 0 36px;
+}
+.login-form{
+  display:flex; flex-direction:column; gap:14px;
+  text-align:left;
+}
+.login-field label{
+  display:block;
+  font-size:10px; letter-spacing:1.5px; text-transform:uppercase;
+  color:var(--gray); font-weight:600; margin-bottom:6px;
+}
+.login-field input{
+  width:100%;
+  background:var(--black-card);
+  border:1px solid var(--line);
+  color:var(--white);
+  padding:13px 14px;
+  border-radius:var(--radius-sm);
+  font-size:15px;
+  letter-spacing:0.3px;
+  transition:border-color .15s ease, box-shadow .15s ease;
+}
+.login-field input:focus{ border-color:var(--red); box-shadow:0 0 0 3px var(--red-glow); }
+.login-error{
+  display:none;
+  color:var(--red);
+  background:rgba(224,20,26,0.1);
+  border:1px solid var(--red-dim);
+  border-radius:var(--radius-sm);
+  padding:10px 12px;
+  font-size:12px;
+  letter-spacing:0.5px;
+  text-transform:uppercase;
+  font-weight:600;
+  align-items:center;
+  gap:8px;
+}
+.login-error.show{ display:flex; animation:shake .3s ease; }
+@keyframes shake{
+  0%,100%{ transform:translateX(0); }
+  25%{ transform:translateX(-6px); }
+  75%{ transform:translateX(6px); }
+}
+.login-submit{
+  margin-top:8px;
+  background:var(--red);
+  color:var(--white);
+  border:none;
+  padding:14px;
+  border-radius:var(--radius-sm);
+  font-family:var(--font-body);
+  font-weight:700;
+  font-size:13px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  transition:background .15s ease, box-shadow .15s ease;
+}
+.login-submit:hover{ background:#ff1a20; box-shadow:0 6px 22px var(--red-glow); }
+.login-footnote{
+  margin-top:26px;
+  font-size:10px;
+  letter-spacing:1px;
+  color:var(--gray-dim);
+  text-transform:uppercase;
+}
+
+/* ============================================================
+   APP (oculta hasta autenticar)
+   ============================================================ */
+#app{ display:none; }
+#app.show{ display:block; }
+
+/* ---------- HEADER ---------- */
+.site-header{
+  position:sticky; top:0; z-index:40;
+  background:linear-gradient(180deg, rgba(10,10,10,0.98) 0%, rgba(10,10,10,0.94) 100%);
+  border-bottom:1px solid var(--line);
+  backdrop-filter:blur(6px);
+}
+.site-header .container{ display:flex; align-items:center; justify-content:space-between; height:72px; }
+.brand{ display:flex; align-items:center; gap:10px; font-family:var(--font-display); font-size:22px; letter-spacing:0.5px; line-height:1; }
+.brand .brand-mark{
+  width:32px; height:32px; background:var(--red);
+  clip-path:polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  display:flex; align-items:center; justify-content:center; font-family:var(--font-display); font-size:15px; flex-shrink:0;
+}
+.brand small{ display:block; font-family:var(--font-body); font-weight:400; font-size:9px; letter-spacing:2px; color:var(--gray); margin-top:2px; }
+
+.header-actions{ display:flex; align-items:center; gap:12px; }
+.role-badge{
+  display:inline-flex; align-items:center; gap:6px;
+  font-size:10px; letter-spacing:1.5px; text-transform:uppercase; font-weight:600;
+  padding:7px 12px; border-radius:20px;
+  border:1px solid var(--line); color:var(--gray);
+}
+.role-badge.is-admin{ border-color:var(--red-dim); color:var(--red); background:rgba(224,20,26,0.08); }
+.role-badge .dot{ width:6px; height:6px; border-radius:50%; background:currentColor; }
+.btn-logout{
+  background:none; border:1px solid var(--line); color:var(--gray);
+  padding:8px 14px; border-radius:20px; font-size:11px; letter-spacing:1px; text-transform:uppercase; font-weight:600;
+}
+.btn-logout:hover{ border-color:var(--white); color:var(--white); }
+
+/* ---------- TABS ---------- */
+.ranking-tabs{
+  display:flex; border-bottom:1px solid var(--line); background:var(--black-panel);
+  position:sticky; top:72px; z-index:30; overflow-x:auto;
+}
+.ranking-tabs .container{ display:flex; gap:6px; padding-top:0; padding-bottom:0; }
+.tab-btn{
+  background:none; border:none; color:var(--gray);
+  font-family:var(--font-display); font-size:15px; letter-spacing:0.5px;
+  padding:16px 18px 13px; border-bottom:3px solid transparent; white-space:nowrap;
+  transition:color .15s ease, border-color .15s ease;
+}
+.tab-btn:hover{ color:var(--white); }
+.tab-btn.active{ color:var(--white); border-bottom-color:var(--red); }
+
+/* ---------- HERO DE SECCION ---------- */
+.section-hero{
+  padding:30px 0 16px; border-bottom:1px solid var(--line);
+  background: radial-gradient(ellipse at 20% 0%, rgba(224,20,26,0.10), transparent 55%), var(--black-void);
+}
+.section-hero h1{ font-family:var(--font-display); font-size:clamp(30px, 6vw, 50px); line-height:0.95; margin:0 0 6px; letter-spacing:0.5px; }
+.section-hero h1 span{ color:var(--red); }
+.section-hero p{ color:var(--gray); font-size:14px; max-width:560px; margin:0; font-weight:300; }
+
+/* ============================================================
+   LISTA DE RANKING — minimalista, sin fotos (estilo UFC rankings)
+   ============================================================ */
+main{ min-height:60vh; }
+.ranking-section{ padding:10px 0 64px; }
+
+.rank-list{ border-top:1px solid var(--line); }
+.rank-line{
+  display:grid;
+  grid-template-columns:52px 22px 1fr auto auto;
+  align-items:center;
+  gap:14px;
+  padding:16px 12px;
+  border-bottom:1px solid var(--line);
+  cursor:pointer;
+  transition:background .12s ease, padding-left .12s ease;
+}
+.rank-line:hover{ background:var(--black-card); padding-left:18px; }
+.rank-line .rl-number{
+  font-family:var(--font-display);
+  font-size:22px;
+  color:var(--gray-dim);
+  text-align:center;
+}
+.rank-line .rl-trend{
+  font-size:13px;
+  text-align:center;
+  font-weight:700;
+}
+.rank-line .rl-trend.up{ color:var(--green); }
+.rank-line .rl-trend.down{ color:var(--red); }
+.rank-line .rl-trend.same{ color:var(--gray-dim); }
+.rank-line .rl-name-wrap{ min-width:0; display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; }
+.rank-line .rl-name{
+  font-family:var(--font-display);
+  font-size:19px;
+  letter-spacing:0.3px;
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+.rank-line .rl-nickname{ font-size:12px; color:var(--gray); font-style:normal; }
+.rank-line .rl-belt-dot{
+  width:10px; height:10px; border-radius:50%; flex-shrink:0;
+  border:1px solid rgba(255,255,255,0.25);
+}
+.rank-line .rl-record{
+  font-size:13px; color:var(--gray); font-weight:500; letter-spacing:0.5px; white-space:nowrap;
+}
+.rank-line .rl-points{
+  font-family:var(--font-display);
+  font-size:15px;
+  color:var(--gray-dim);
+  width:56px;
+  text-align:right;
+}
+
+/* fila campeón (#1) destacada solo con tipografía/color, sin foto */
+.rank-line.is-champion{
+  background:linear-gradient(90deg, rgba(224,20,26,0.10), transparent 60%);
+  border-left:3px solid var(--red);
+  padding-top:20px; padding-bottom:20px;
+}
+.rank-line.is-champion .rl-number{ color:var(--red); font-size:28px; }
+.rank-line.is-champion .rl-name{ font-size:24px; }
+.rank-line.is-champion::before{ content:'C'; display:none; }
+
+.rank-line-head{
+  display:grid;
+  grid-template-columns:52px 22px 1fr auto auto;
+  gap:14px;
+  padding:0 12px 10px;
+  font-size:10px; letter-spacing:1.5px; text-transform:uppercase; color:var(--gray-dim); font-weight:600;
+}
+.rank-line-head span:nth-child(1){ text-align:center; }
+.rank-line-head span:nth-child(2){ text-align:center; }
+
+.empty-state{
+  text-align:center; padding:60px 20px; color:var(--gray);
+  border:1px dashed var(--line); border-radius:var(--radius-md);
+}
+.empty-state h3{ font-family:var(--font-display); color:var(--white); font-size:22px; margin:0 0 8px; }
+.empty-state .cta-red{ margin-top:16px; }
+
+/* ============================================================
+   BOTONES
+   ============================================================ */
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  font-family:var(--font-body); font-weight:600; font-size:13px; letter-spacing:1px; text-transform:uppercase;
+  padding:12px 22px; border-radius:var(--radius-sm); border:1px solid transparent; transition:all .15s ease;
+}
+.btn-red{ background:var(--red); color:var(--white); }
+.btn-red:hover{ background:#ff1a20; box-shadow:0 4px 18px var(--red-glow); }
+.btn-outline{ background:transparent; color:var(--white); border-color:var(--line); }
+.btn-outline:hover{ border-color:var(--white); }
+.btn-ghost{ background:transparent; color:var(--gray); border-color:transparent; }
+.btn-ghost:hover{ color:var(--white); }
+.btn-danger{ background:transparent; color:var(--red); border-color:var(--red-dim); }
+.btn-danger:hover{ background:rgba(224,20,26,0.1); }
+.btn-sm{ padding:8px 14px; font-size:11px; }
+.btn:disabled{ opacity:0.4; cursor:not-allowed; }
+
+/* ============================================================
+   ADMIN TOOLBAR
+   ============================================================ */
+.admin-toolbar{ display:none; background:linear-gradient(90deg, rgba(224,20,26,0.12), rgba(224,20,26,0.02)); border-bottom:1px solid var(--red-dim); }
+.admin-toolbar.show{ display:block; }
+.admin-toolbar .container{ display:flex; align-items:center; justify-content:space-between; gap:14px; padding-top:10px; padding-bottom:10px; flex-wrap:wrap; }
+.admin-toolbar .label{ font-size:11px; letter-spacing:1.5px; text-transform:uppercase; color:var(--red); font-weight:600; display:flex; align-items:center; gap:8px; }
+.admin-toolbar .label::before{ content:''; width:7px; height:7px; border-radius:50%; background:var(--red); box-shadow:0 0 0 3px rgba(224,20,26,0.25); }
+.admin-actions{ display:flex; gap:8px; flex-wrap:wrap; }
+
+/* ============================================================
+   PERFIL DE ATLETA — "Fighter Card"
+   ============================================================ */
+.profile-view{ padding-bottom:70px; }
+.profile-hero{
+  position:relative; min-height:440px; display:flex; align-items:flex-end;
+  background:#000; overflow:hidden; border-bottom:2px solid var(--red);
+}
+.profile-hero .hero-photo{
+  position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:top center;
+  filter:grayscale(25%) contrast(1.05) brightness(0.9);
+}
+.profile-hero .hero-photo.placeholder{ filter:none; }
+.profile-hero::before{
+  content:''; position:absolute; inset:0;
+  background:linear-gradient(180deg, rgba(10,10,10,0.10) 0%, rgba(10,10,10,0.55) 55%, rgba(10,10,10,0.97) 100%);
+  z-index:1;
+}
+.profile-hero-content{ position:relative; z-index:2; width:100%; padding:40px 0 32px; }
+.back-btn{
+  position:absolute; top:20px; left:24px; z-index:5;
+  display:inline-flex; align-items:center; gap:8px;
+  background:rgba(10,10,10,0.6); border:1px solid var(--line); color:var(--white);
+  padding:9px 16px 9px 12px; border-radius:20px; font-size:12px; letter-spacing:1px; text-transform:uppercase; font-weight:600;
+  backdrop-filter:blur(4px);
+}
+.back-btn:hover{ border-color:var(--red); }
+.profile-belt-tag{ display:inline-flex; align-items:center; gap:8px; font-size:11px; letter-spacing:2px; text-transform:uppercase; font-weight:600; color:var(--white); margin-bottom:10px; }
+.profile-belt-tag .swatch{ width:22px; height:12px; border-radius:2px; border:1px solid rgba(255,255,255,0.4); }
+.profile-nickname{ font-size:18px; color:var(--red); font-weight:500; margin:0 0 4px; }
+.profile-name{ font-family:var(--font-display); font-size:clamp(36px, 7vw, 70px); line-height:0.92; margin:0 0 14px; letter-spacing:0.5px; }
+.profile-meta-row{ display:flex; flex-wrap:wrap; gap:26px; margin-bottom:8px; }
+.profile-meta-item .k{ font-size:10px; letter-spacing:1.5px; text-transform:uppercase; color:var(--gray); margin:0 0 3px; }
+.profile-meta-item .v{ font-family:var(--font-display); font-size:22px; }
+.profile-meta-item .v .sep{ color:var(--gray-dim); margin:0 3px; }
+.profile-meta-item .v .l{ color:#e05a2a; }
+.profile-meta-item .v .d{ color:var(--gray); }
+.profile-meta-item .v .w{ color:var(--green); }
+.profile-admin-actions{ position:absolute; top:20px; right:24px; z-index:5; display:flex; gap:8px; }
+
+/* perfil táctico */
+.tactical-section{ padding:34px 0 10px; }
+.tactical-grid{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px; }
+.tactical-card{
+  background:var(--black-card); border:1px solid var(--line); border-left:3px solid var(--red);
+  border-radius:var(--radius-md); padding:20px 22px;
+}
+.tactical-card .tc-label{ font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--gray); margin:0 0 8px; font-weight:600; }
+.tactical-card .tc-value{ font-family:var(--font-display); font-size:24px; line-height:1.1; }
+.tactical-card.quote .tc-value{ font-family:var(--font-body); font-weight:500; font-style:italic; font-size:16px; color:var(--white); }
+
+/* stats */
+.stats-section{ padding:26px 0 40px; }
+.rank-block-title{ display:flex; align-items:baseline; gap:12px; margin:0 0 20px; }
+.rank-block-title h2{ font-family:var(--font-display); font-size:22px; letter-spacing:0.5px; margin:0; color:var(--white); }
+.stats-grid{ display:grid; grid-template-columns:repeat(4, 1fr); gap:14px; }
+.stat-panel{
+  background:var(--black-card); border:1px solid var(--line); border-radius:var(--radius-md);
+  aspect-ratio:1/0.85; display:flex; flex-direction:column; justify-content:space-between; padding:20px;
+  position:relative; overflow:hidden; transition:border-color .15s ease;
+}
+.stat-panel:hover{ border-color:var(--red); }
+.stat-panel::before{
+  content:''; position:absolute; bottom:0; left:0; right:0; height:3px; background:var(--red);
+  transform:scaleX(0.15); transform-origin:left; transition:transform .4s ease;
+}
+.stat-panel:hover::before{ transform:scaleX(1); }
+.stat-panel .sp-icon{ font-size:26px; opacity:0.85; }
+.stat-panel .sp-value{ font-family:var(--font-display); font-size:clamp(32px,4vw,44px); line-height:1; color:var(--white); }
+.stat-panel .sp-label{ font-size:11px; letter-spacing:1px; text-transform:uppercase; color:var(--gray); font-weight:600; }
+
+/* ============================================================
+   MODAL (formulario admin)
+   ============================================================ */
+.modal-overlay{
+  position:fixed; inset:0; z-index:100; background:rgba(5,5,5,0.82); backdrop-filter:blur(3px);
+  display:flex; align-items:flex-start; justify-content:center; padding:40px 16px; overflow-y:auto;
+}
+.modal-box{
+  background:var(--black-panel); border:1px solid var(--line); border-top:3px solid var(--red);
+  border-radius:var(--radius-md); width:100%; max-width:660px; padding:30px 30px 26px; animation:modalIn .18s ease;
+}
+@keyframes modalIn{ from{ opacity:0; transform:translateY(10px); } to{ opacity:1; transform:translateY(0); } }
+.modal-header{ display:flex; align-items:center; justify-content:space-between; margin-bottom:22px; }
+.modal-header h2{ font-family:var(--font-display); font-size:24px; margin:0; letter-spacing:0.3px; }
+.modal-close{ background:none; border:none; color:var(--gray); font-size:22px; line-height:1; padding:4px; }
+.modal-close:hover{ color:var(--white); }
+.form-grid{ display:grid; grid-template-columns:1fr 1fr; gap:14px 16px; }
+.form-field{ display:flex; flex-direction:column; gap:6px; }
+.form-field.full{ grid-column:1/-1; }
+.form-field label{ font-size:11px; letter-spacing:1px; text-transform:uppercase; color:var(--gray); font-weight:600; }
+.form-field input[type=text], .form-field input[type=number], .form-field select, .form-field textarea{
+  background:var(--black-card); border:1px solid var(--line); color:var(--white);
+  padding:10px 12px; border-radius:var(--radius-sm); font-size:14px; width:100%;
+}
+.form-field input:focus, .form-field select:focus, .form-field textarea:focus{ border-color:var(--red); }
+.form-field textarea{ resize:vertical; min-height:60px; }
+.photo-upload{ display:flex; align-items:center; gap:16px; }
+.photo-preview{
+  width:84px; height:84px; border-radius:50%; overflow:hidden; background:var(--black-card); border:1px solid var(--line);
+  flex-shrink:0; display:flex; align-items:center; justify-content:center; color:var(--gray-dim); font-size:11px; text-align:center;
+}
+.photo-preview img{ width:100%; height:100%; object-fit:cover; object-position:top center; }
+.file-input-label{
+  display:inline-flex; align-items:center; gap:8px; border:1px dashed var(--line); padding:10px 16px;
+  border-radius:var(--radius-sm); font-size:12px; letter-spacing:0.5px; color:var(--gray);
+}
+.file-input-label:hover{ border-color:var(--red); color:var(--white); }
+.file-input-label input{ display:none; }
+.section-divider{ grid-column:1/-1; border:none; border-top:1px solid var(--line); margin:6px 0 2px; }
+.section-divider-label{ grid-column:1/-1; font-family:var(--font-display); font-size:14px; color:var(--red); letter-spacing:0.5px; margin:4px 0 -4px; }
+.modal-footer{ display:flex; justify-content:space-between; align-items:center; margin-top:24px; padding-top:18px; border-top:1px solid var(--line); flex-wrap:wrap; gap:10px; }
+
+/* toast */
+.toast{
+  position:fixed; bottom:24px; left:50%; transform:translateX(-50%);
+  background:var(--black-panel); border:1px solid var(--red); color:var(--white);
+  padding:13px 22px; border-radius:var(--radius-sm); font-size:13px; letter-spacing:0.5px; z-index:200;
+  box-shadow:0 10px 30px rgba(0,0,0,0.5); display:flex; align-items:center; gap:10px;
+  opacity:0; pointer-events:none; transition:opacity .2s ease, transform .2s ease;
+}
+.toast.show{ opacity:1; transform:translateX(-50%) translateY(-6px); }
+.toast .dot{ width:8px; height:8px; border-radius:50%; background:var(--red); flex-shrink:0; }
+
+/* footer */
+.site-footer{ border-top:1px solid var(--line); padding:22px 0; background:var(--black-panel); }
+.site-footer .container{ display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; }
+.site-footer p{ margin:0; font-size:11px; color:var(--gray-dim); letter-spacing:0.5px; }
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 980px){
+  .stats-grid{ grid-template-columns:repeat(2,1fr); }
+  .tactical-grid{ grid-template-columns:1fr; }
+  .form-grid{ grid-template-columns:1fr; }
+}
+@media (max-width: 720px){
+  .site-header .container{ height:60px; }
+  .brand{ font-size:18px; }
+  .ranking-tabs{ top:60px; }
+  .stats-grid{ grid-template-columns:repeat(2,1fr); }
+  .rank-line, .rank-line-head{ grid-template-columns:34px 18px 1fr auto; }
+  .rank-line .rl-points, .rank-line-head span:nth-child(5){ display:none; }
+  .rank-line .rl-nickname{ display:none; }
+  .profile-hero{ min-height:360px; }
+  .profile-meta-row{ gap:16px; }
+}
+@media (max-width: 460px){
+  .container{ padding:0 16px; }
+  .rank-line .rl-record{ font-size:11px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     PANTALLA DE LOGIN
+     ============================================================ -->
+<div id="login-screen">
+  <div class="login-box">
+    <div class="login-mark">V</div>
+    <h1 class="login-title">TEAM <span>VIKINGO</span></h1>
+    <p class="login-subtitle">Acceso Restringido · Ranking Interno BJJ</p>
+    <form class="login-form" id="login-form" autocomplete="off">
+      <div class="login-field">
+        <label for="login-user">Usuario</label>
+        <input type="text" id="login-user" autocomplete="username" required>
+      </div>
+      <div class="login-field">
+        <label for="login-pass">Contraseña</label>
+        <input type="password" id="login-pass" autocomplete="current-password" required>
+      </div>
+      <div class="login-error" id="login-error">⚠ Acceso Denegado — usuario o contraseña incorrectos.</div>
+      <button type="submit" class="login-submit">Ingresar</button>
+    </form>
+    <p class="login-footnote">Solo miembros autorizados del Team Vikingo</p>
+  </div>
+</div>
+
+<!-- ============================================================
+     APLICACIÓN (oculta hasta iniciar sesión)
+     ============================================================ -->
+<div id="app">
+  <header class="site-header">
+    <div class="container">
+      <a href="#/" class="brand" id="brand-link">
+        <span class="brand-mark">V</span>
+        <span>
+          TEAM VIKINGO RANKINGS
+          <small>SISTEMA OFICIAL DE CLASIFICACIÓN BJJ</small>
+        </span>
+      </a>
+      <div class="header-actions">
+        <span class="role-badge" id="role-badge"><span class="dot"></span><span id="role-badge-text">Lector</span></span>
+        <button class="btn-logout" id="btn-logout">Cerrar sesión</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="admin-toolbar" id="admin-toolbar">
+    <div class="container">
+      <span class="label">Modo administrador activo</span>
+      <div class="admin-actions">
+        <button class="btn btn-outline btn-sm" id="btn-add-fighter">+ Añadir Peleador</button>
+        <button class="btn btn-red" id="btn-export">⭳ Generar y Descargar datos.json</button>
+      </div>
+    </div>
+  </div>
+
+  <main id="app-root">
+    <div id="view-rankings">
+      <section class="section-hero">
+        <div class="container">
+          <h1>TOP <span>RANKINGS</span></h1>
+          <p>Clasificación oficial de atletas del Team Vikingo, ordenada automáticamente por puntos de ranking.</p>
+        </div>
+      </section>
+
+      <div class="ranking-tabs">
+        <div class="container">
+          <button class="tab-btn active" data-category="general">Top General</button>
+          <button class="tab-btn" data-category="blanco">Cinturones Blancos</button>
+          <button class="tab-btn" data-category="azul">Cinturones Azules</button>
+        </div>
+      </div>
+
+      <section class="ranking-section">
+        <div class="container">
+          <div class="rank-line-head">
+            <span>#</span><span></span><span>Peleador</span><span>Récord</span><span>Pts</span>
+          </div>
+          <div id="ranking-content"></div>
+        </div>
+      </section>
+    </div>
+
+    <div id="view-profile" class="hidden"></div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© <span id="year"></span> Team Vikingo Rankings. Acceso restringido — datos internos del equipo.</p>
+    </div>
+  </footer>
+</div>
+
+<div id="modal-root"></div>
+<div class="toast" id="toast"><span class="dot"></span><span id="toast-msg"></span></div>
+
+<script>
+/* ================================================================
+   TEAM VIKINGO RANKINGS — motor de la aplicación (v2)
+   - Login con roles (lector / admin).
+   - Ranking 100% automático: se ordena por `puntosRanking`.
+   - Ranking = lista minimalista (sin fotos). Perfil = fighter card.
+
+   NOTA DE SEGURIDAD HONESTA:
+   Este login corre enteramente en el navegador (no hay servidor).
+   Cualquier persona con conocimientos técnicos puede leer las
+   credenciales abriendo el "Ver código fuente" de esta página.
+   Sirve para evitar que un visitante casual navegue o edite el
+   ranking, pero NO es seguridad real de nivel producción. Si
+   necesitas protección genuina, esto debe ir detrás de un login
+   con backend real.
+   ================================================================ */
+
+const LS_KEY   = 'teamVikingo_datos_v2';
+const ROLE_KEY = 'teamVikingo_role';
+
+const CREDENTIALS = {
+  'Team Vikingo': { password: 'pasandoguardia',      role: 'lector' },
+  'admin':        { password: 'admin_pasandoguardia', role: 'admin'  }
+};
+
+const BELT_ORDER = ['Blanca','Azul','Violeta','Marrón','Negra'];
+const BELT_COLORS = {
+  'Blanca':  'var(--belt-blanco)',
+  'Azul':    'var(--belt-azul)',
+  'Violeta': 'var(--belt-violeta)',
+  'Marrón':  'var(--belt-marron)',
+  'Negra':   'var(--belt-negro)'
+};
+const TREND_ICON = { up:'▲', down:'▼', same:'—' };
+
+let STATE = { equipo:'Team Vikingo', actualizado:'', peleadores:[] };
+let currentTab = 'general';
+let currentRole = null; // 'lector' | 'admin' | null
+let isAdmin = false;
+
+/* ---------------------------------------------------------------
+   LOGIN
+   --------------------------------------------------------------- */
+function initLogin(){
+  const savedRole = sessionStorage.getItem(ROLE_KEY);
+  if(savedRole === 'lector' || savedRole === 'admin'){
+    enterApp(savedRole);
+    return;
+  }
+  document.getElementById('login-screen').style.display = 'flex';
+}
+
+document.getElementById('login-form').addEventListener('submit', (e)=>{
+  e.preventDefault();
+  const user = document.getElementById('login-user').value.trim();
+  const pass = document.getElementById('login-pass').value;
+  const errorBox = document.getElementById('login-error');
+
+  const entry = CREDENTIALS[user];
+  if(entry && entry.password === pass){
+    errorBox.classList.remove('show');
+    sessionStorage.setItem(ROLE_KEY, entry.role);
+    enterApp(entry.role);
+  }else{
+    errorBox.classList.remove('show');
+    void errorBox.offsetWidth; // reinicia la animación de "shake" si se repite el error
+    errorBox.classList.add('show');
+    document.getElementById('login-pass').value = '';
+  }
+});
+
+function enterApp(role){
+  currentRole = role;
+  isAdmin = role === 'admin';
+  document.getElementById('login-screen').style.display = 'none';
+  document.getElementById('app').classList.add('show');
+
+  const badge = document.getElementById('role-badge');
+  document.getElementById('role-badge-text').textContent = isAdmin ? 'Administrador' : 'Lector';
+  badge.classList.toggle('is-admin', isAdmin);
+  document.getElementById('admin-toolbar').classList.toggle('show', isAdmin);
+
+  loadData().then(handleRoute);
+}
+
+document.getElementById('btn-logout').addEventListener('click', ()=>{
+  sessionStorage.removeItem(ROLE_KEY);
+  location.hash = '';
+  document.getElementById('app').classList.remove('show');
+  document.getElementById('login-form').reset();
+  document.getElementById('login-error').classList.remove('show');
+  document.getElementById('login-screen').style.display = 'flex';
+  currentRole = null;
+  isAdmin = false;
+});
+
+/* ---------------------------------------------------------------
+   CARGA DE DATOS
+   --------------------------------------------------------------- */
+async function loadData(){
+  const cached = localStorage.getItem(LS_KEY);
+  if(cached){
+    try{ STATE = JSON.parse(cached); return; }
+    catch(e){ /* si el cache está corrupto, seguimos al fetch */ }
+  }
+  try{
+    const res = await fetch('datos.json', { cache: 'no-store' });
+    if(!res.ok) throw new Error('No se pudo leer datos.json');
+    STATE = await res.json();
+  }catch(err){
+    console.error(err);
+    STATE = { equipo:'Team Vikingo', actualizado:'', peleadores:[] };
+    showToast('No se encontró datos.json — inicia agregando peleadores.');
+  }
+}
+
+function persist(){
+  localStorage.setItem(LS_KEY, JSON.stringify(STATE));
+}
+
+function getFighterById(id){ return STATE.peleadores.find(f => f.id === id); }
+
+function nextId(){
+  let n = STATE.peleadores.length + 1;
+  let id = 'fighter-' + String(n).padStart(3,'0');
+  while(getFighterById(id)){ n++; id = 'fighter-' + String(n).padStart(3,'0'); }
+  return id;
+}
+
+/* ---------------------------------------------------------------
+   UTILIDADES DE PRESENTACIÓN
+   --------------------------------------------------------------- */
+function initials(name){
+  return name.split(' ').filter(Boolean).slice(0,2).map(w=>w[0]).join('').toUpperCase();
+}
+function placeholderPhoto(name, belt){
+  const bg = '#1a1a1a', fg = '#3a3a3a';
+  const accent = BELT_COLORS[belt] || '#e0141a';
+  const txt = initials(name || '??');
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300">
+    <rect width="300" height="300" fill="${bg}"/>
+    <circle cx="150" cy="115" r="55" fill="${fg}"/>
+    <rect x="55" y="190" width="190" height="120" rx="60" fill="${fg}"/>
+    <rect x="0" y="270" width="300" height="8" fill="${accent}"/>
+    <text x="150" y="245" font-family="Arial, sans-serif" font-size="42" font-weight="700" fill="#8a8a8a" text-anchor="middle">${txt}</text>
+  </svg>`;
+  return 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svg)));
+}
+function photoSrc(f){ return f.foto && f.foto.length > 0 ? f.foto : placeholderPhoto(f.nombre, f.cinturon); }
+function recordPlain(f){ return `${f.victorias}-${f.derrotas}-${f.empates}`; }
+
+function showToast(msg){
+  const t = document.getElementById('toast');
+  document.getElementById('toast-msg').textContent = msg;
+  t.classList.add('show');
+  clearTimeout(showToast._t);
+  showToast._t = setTimeout(()=> t.classList.remove('show'), 2800);
+}
+function escapeHtml(str){
+  const div = document.createElement('div');
+  div.textContent = str == null ? '' : str;
+  return div.innerHTML;
+}
+function escapeAttr(str){ return (str || '').replace(/"/g,'&quot;'); }
+
+/* ---------------------------------------------------------------
+   ROUTER (hash-based)
+   --------------------------------------------------------------- */
+function handleRoute(){
+  if(!currentRole) return; // sin sesión no hay navegación
+  const hash = location.hash || '#/';
+  const profileMatch = hash.match(/^#\/perfil\/(.+)$/);
+  if(profileMatch){
+    const fighter = getFighterById(decodeURIComponent(profileMatch[1]));
+    if(fighter){ renderProfile(fighter); return; }
+  }
+  renderRankingsView();
+}
+window.addEventListener('hashchange', handleRoute);
+function goToProfile(id){ location.hash = '#/perfil/' + encodeURIComponent(id); }
+function goToRankings(){ location.hash = '#/'; }
+
+/* ---------------------------------------------------------------
+   VISTA: RANKINGS — lista minimalista y tipográfica
+   --------------------------------------------------------------- */
+function renderRankingsView(){
+  document.getElementById('view-rankings').classList.remove('hidden');
+  document.getElementById('view-profile').classList.add('hidden');
+  window.scrollTo({top:0, behavior:'auto'});
+  renderRankings();
+}
+
+// *** ORDENAMIENTO AUTOMÁTICO ***
+// Antes de renderizar, siempre se ordena por puntosRanking (mayor a menor).
+// Nunca se asignan posiciones manualmente: la posición ES el índice tras el sort.
+function fightersForTab(tab){
+  let list = [...STATE.peleadores];
+  if(tab !== 'general'){
+    const beltName = tab === 'blanco' ? 'Blanca' : 'Azul';
+    list = list.filter(f => f.cinturon === beltName);
+  }
+  list.sort((a,b) => (Number(b.puntosRanking) || 0) - (Number(a.puntosRanking) || 0));
+  return list.slice(0,20);
+}
+
+function renderRankings(){
+  const wrap = document.getElementById('ranking-content');
+  const list = fightersForTab(currentTab);
+
+  if(list.length === 0){
+    wrap.innerHTML = `
+      <div class="empty-state">
+        <h3>Aún no hay peleadores en este ranking</h3>
+        <p>${isAdmin ? 'Añade el primer peleador del Team Vikingo.' : 'Vuelve pronto, el equipo actualizará esta categoría.'}</p>
+        ${isAdmin ? '<button class="btn btn-red cta-red" onclick="openFighterForm()">+ Añadir Peleador</button>' : ''}
+      </div>`;
+    return;
+  }
+
+  let html = `<div class="rank-list">`;
+  list.forEach((f, i) => {
+    const pos = i + 1;
+    const trend = TREND_ICON[f.tendencia] || TREND_ICON.same;
+    const trendClass = ['up','down','same'].includes(f.tendencia) ? f.tendencia : 'same';
+    html += `
+      <div class="rank-line ${pos === 1 ? 'is-champion' : ''}" onclick="goToProfile('${f.id}')">
+        <span class="rl-number">${pos}</span>
+        <span class="rl-trend ${trendClass}">${trend}</span>
+        <span class="rl-name-wrap">
+          <span class="rl-belt-dot" style="background:${BELT_COLORS[f.cinturon]}"></span>
+          <span class="rl-name">${escapeHtml(f.nombre)}</span>
+          <span class="rl-nickname">"${escapeHtml(f.apodo)}"</span>
+        </span>
+        <span class="rl-record">${recordPlain(f)}</span>
+        <span class="rl-points">${Number(f.puntosRanking)||0}</span>
+      </div>`;
+  });
+  html += `</div>`;
+  wrap.innerHTML = html;
+}
+
+document.querySelectorAll('.tab-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    currentTab = btn.dataset.category;
+    renderRankings();
+  });
+});
+
+/* ---------------------------------------------------------------
+   VISTA: PERFIL — "Fighter Card"
+   --------------------------------------------------------------- */
+function renderProfile(f){
+  document.getElementById('view-rankings').classList.add('hidden');
+  const view = document.getElementById('view-profile');
+  view.classList.remove('hidden');
+  window.scrollTo({top:0, behavior:'auto'});
+
+  const hasPhoto = f.foto && f.foto.length > 0;
+
+  view.innerHTML = `
+    <div class="profile-hero">
+      <img class="hero-photo ${hasPhoto ? '' : 'placeholder'}" src="${photoSrc(f)}" alt="${escapeHtml(f.nombre)}">
+      <a href="#/" class="back-btn">← Rankings</a>
+      ${isAdmin ? `
+        <div class="profile-admin-actions">
+          <button class="btn btn-outline btn-sm" onclick="openFighterForm('${f.id}')">✎ Editar Perfil</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteFighter('${f.id}')">🗑 Eliminar</button>
+        </div>` : ''}
+      <div class="profile-hero-content">
+        <div class="container">
+          <div class="profile-belt-tag">
+            <span class="swatch" style="background:${BELT_COLORS[f.cinturon]}"></span>
+            Cinturón ${f.cinturon}
+          </div>
+          <p class="profile-nickname">"${escapeHtml(f.apodo)}"</p>
+          <h1 class="profile-name">${escapeHtml(f.nombre)}</h1>
+          <div class="profile-meta-row">
+            <div class="profile-meta-item"><p class="k">Peso</p><p class="v">${f.peso} kg</p></div>
+            <div class="profile-meta-item"><p class="k">Edad</p><p class="v">${f.edad} años</p></div>
+            <div class="profile-meta-item">
+              <p class="k">Récord (V-D-E)</p>
+              <p class="v"><span class="w">${f.victorias}</span><span class="sep">-</span><span class="l">${f.derrotas}</span><span class="sep">-</span><span class="d">${f.empates}</span></p>
+            </div>
+            <div class="profile-meta-item"><p class="k">Puntos de Ranking</p><p class="v">${Number(f.puntosRanking)||0}</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section class="tactical-section">
+      <div class="container">
+        <div class="tactical-grid">
+          <div class="tactical-card">
+            <p class="tc-label">Estilo de Grappling</p>
+            <p class="tc-value">${escapeHtml(f.estiloGrappling) || '—'}</p>
+          </div>
+          <div class="tactical-card">
+            <p class="tc-label">Años en el Tatami</p>
+            <p class="tc-value">${f.aniosTatami != null ? f.aniosTatami : '—'}</p>
+          </div>
+          <div class="tactical-card quote">
+            <p class="tc-label">Frase de Guerra</p>
+            <p class="tc-value">"${escapeHtml(f.fraseGuerra) || '—'}"</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="stats-section">
+      <div class="container">
+        <div class="rank-block-title"><h2>Estadísticas de Combate</h2></div>
+        <div class="stats-grid">
+          <div class="stat-panel">
+            <span class="sp-icon">🔒</span>
+            <div><p class="sp-value">${f.stats.victoriasSumision}</p><p class="sp-label">Victorias por Sumisión</p></div>
+          </div>
+          <div class="stat-panel">
+            <span class="sp-icon">🎯</span>
+            <div><p class="sp-value">${f.stats.victoriasPuntos}</p><p class="sp-label">Victorias por Puntos</p></div>
+          </div>
+          <div class="stat-panel">
+            <span class="sp-icon">⚡</span>
+            <div><p class="sp-value">${f.stats.efectividadPases}%</p><p class="sp-label">Efectividad de Pases</p></div>
+          </div>
+          <div class="stat-panel">
+            <span class="sp-icon">🛡</span>
+            <div><p class="sp-value">${f.stats.defensaGeneral}%</p><p class="sp-label">Defensa General</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  `;
+}
+
+/* ---------------------------------------------------------------
+   ADMIN: botones globales
+   --------------------------------------------------------------- */
+document.getElementById('btn-add-fighter').addEventListener('click', ()=> openFighterForm());
+document.getElementById('btn-export').addEventListener('click', exportDatosJson);
+
+/* ---------------------------------------------------------------
+   FORMULARIO: AÑADIR / EDITAR PELEADOR (solo admin)
+   --------------------------------------------------------------- */
+let formPhotoBase64 = '';
+
+function openFighterForm(fighterId){
+  if(!isAdmin) return;
+  const editing = !!fighterId;
+  const f = editing ? getFighterById(fighterId) : null;
+  formPhotoBase64 = f ? (f.foto || '') : '';
+
+  const modalRoot = document.getElementById('modal-root');
+  modalRoot.innerHTML = `
+    <div class="modal-overlay" id="fighter-modal-overlay">
+      <div class="modal-box">
+        <div class="modal-header">
+          <h2>${editing ? 'Editar Peleador' : 'Añadir Nuevo Peleador'}</h2>
+          <button class="modal-close" id="fighter-modal-close">&times;</button>
+        </div>
+        <form id="fighter-form">
+          <div class="form-grid">
+
+            <div class="form-field full">
+              <label>Foto del Peleador</label>
+              <div class="photo-upload">
+                <div class="photo-preview" id="photo-preview">
+                  ${formPhotoBase64 ? `<img src="${formPhotoBase64}">` : 'Sin foto'}
+                </div>
+                <label class="file-input-label">
+                  📷 Subir imagen desde tu PC
+                  <input type="file" id="photo-file-input" accept="image/*">
+                </label>
+              </div>
+            </div>
+
+            <div class="section-divider-label">Datos Generales</div>
+            <div class="section-divider"></div>
+
+            <div class="form-field full">
+              <label>Nombre completo</label>
+              <input type="text" id="f-nombre" required value="${f ? escapeAttr(f.nombre) : ''}">
+            </div>
+            <div class="form-field">
+              <label>Apodo</label>
+              <input type="text" id="f-apodo" value="${f ? escapeAttr(f.apodo) : ''}">
+            </div>
+            <div class="form-field">
+              <label>Cinturón</label>
+              <select id="f-cinturon">
+                ${BELT_ORDER.map(b=>`<option value="${b}" ${f && f.cinturon===b ? 'selected':''}>${b}</option>`).join('')}
+              </select>
+            </div>
+            <div class="form-field">
+              <label>Peso (kg)</label>
+              <input type="number" id="f-peso" min="0" step="0.1" value="${f ? f.peso : ''}">
+            </div>
+            <div class="form-field">
+              <label>Edad</label>
+              <input type="number" id="f-edad" min="0" step="1" value="${f ? f.edad : ''}">
+            </div>
+            <div class="form-field">
+              <label>Victorias</label>
+              <input type="number" id="f-victorias" min="0" step="1" value="${f ? f.victorias : 0}">
+            </div>
+            <div class="form-field">
+              <label>Derrotas</label>
+              <input type="number" id="f-derrotas" min="0" step="1" value="${f ? f.derrotas : 0}">
+            </div>
+            <div class="form-field">
+              <label>Empates</label>
+              <input type="number" id="f-empates" min="0" step="1" value="${f ? f.empates : 0}">
+            </div>
+
+            <div class="section-divider-label">Perfil Táctico</div>
+            <div class="section-divider"></div>
+
+            <div class="form-field">
+              <label>Estilo de Grappling</label>
+              <input type="text" id="f-estilo" placeholder="Pasador, Guardero, Híbrido..." value="${f ? escapeAttr(f.estiloGrappling) : ''}">
+            </div>
+            <div class="form-field">
+              <label>Años en el Tatami</label>
+              <input type="number" id="f-anios" min="0" step="1" value="${f && f.aniosTatami != null ? f.aniosTatami : ''}">
+            </div>
+            <div class="form-field full">
+              <label>Frase de Guerra / Lema personal</label>
+              <input type="text" id="f-frase" value="${f ? escapeAttr(f.fraseGuerra) : ''}">
+            </div>
+
+            <div class="section-divider-label">Estadísticas de Combate</div>
+            <div class="section-divider"></div>
+
+            <div class="form-field">
+              <label>Victorias por sumisión</label>
+              <input type="number" id="f-stat-sumision" min="0" step="1" value="${f ? f.stats.victoriasSumision : 0}">
+            </div>
+            <div class="form-field">
+              <label>Victorias por puntos</label>
+              <input type="number" id="f-stat-puntos" min="0" step="1" value="${f ? f.stats.victoriasPuntos : 0}">
+            </div>
+            <div class="form-field">
+              <label>Efectividad de pases (%)</label>
+              <input type="number" id="f-stat-pase" min="0" max="100" step="1" value="${f ? f.stats.efectividadPases : 0}">
+            </div>
+            <div class="form-field">
+              <label>Defensa general (%)</label>
+              <input type="number" id="f-stat-defensa" min="0" max="100" step="1" value="${f ? f.stats.defensaGeneral : 0}">
+            </div>
+
+            <div class="section-divider-label">Ranking (ordenamiento automático)</div>
+            <div class="section-divider"></div>
+
+            <div class="form-field">
+              <label>Puntos de Ranking</label>
+              <input type="number" id="f-puntos" min="0" step="1" value="${f && f.puntosRanking != null ? f.puntosRanking : 0}">
+            </div>
+            <div class="form-field">
+              <label>Tendencia (visual)</label>
+              <select id="f-tendencia">
+                <option value="same" ${!f || f.tendencia==='same' ? 'selected':''}>— Se mantiene</option>
+                <option value="up" ${f && f.tendencia==='up' ? 'selected':''}>▲ Sube</option>
+                <option value="down" ${f && f.tendencia==='down' ? 'selected':''}>▼ Baja</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <span style="font-size:11px;color:var(--gray);">La posición en la lista se recalcula sola según los puntos de ranking.</span>
+            <div style="display:flex; gap:10px;">
+              <button type="button" class="btn btn-ghost" id="fighter-cancel">Cancelar</button>
+              <button type="submit" class="btn btn-red">${editing ? 'Guardar Cambios' : 'Añadir Peleador'}</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  `;
+
+  document.getElementById('photo-file-input').addEventListener('change', handlePhotoUpload);
+  document.getElementById('fighter-modal-close').addEventListener('click', closeFighterForm);
+  document.getElementById('fighter-cancel').addEventListener('click', closeFighterForm);
+  document.getElementById('fighter-modal-overlay').addEventListener('click', (e)=>{
+    if(e.target.id === 'fighter-modal-overlay') closeFighterForm();
+  });
+  document.getElementById('fighter-form').addEventListener('submit', (e)=> saveFighterForm(e, fighterId));
+}
+
+function handlePhotoUpload(e){
+  const file = e.target.files[0];
+  if(!file) return;
+  if(file.size > 3 * 1024 * 1024){
+    showToast('La imagen es muy pesada (máx. 3MB).');
+    e.target.value = '';
+    return;
+  }
+  const reader = new FileReader();
+  reader.onload = (ev)=>{
+    formPhotoBase64 = ev.target.result;
+    document.getElementById('photo-preview').innerHTML = `<img src="${formPhotoBase64}">`;
+  };
+  reader.readAsDataURL(file);
+}
+
+function closeFighterForm(){ document.getElementById('modal-root').innerHTML = ''; }
+
+function saveFighterForm(e, fighterId){
+  e.preventDefault();
+  if(!isAdmin) return;
+  const editing = !!fighterId;
+
+  const data = {
+    id: editing ? fighterId : nextId(),
+    nombre: document.getElementById('f-nombre').value.trim(),
+    apodo: document.getElementById('f-apodo').value.trim(),
+    cinturon: document.getElementById('f-cinturon').value,
+    peso: Number(document.getElementById('f-peso').value) || 0,
+    edad: Number(document.getElementById('f-edad').value) || 0,
+    victorias: Number(document.getElementById('f-victorias').value) || 0,
+    derrotas: Number(document.getElementById('f-derrotas').value) || 0,
+    empates: Number(document.getElementById('f-empates').value) || 0,
+    foto: formPhotoBase64 || '',
+    estiloGrappling: document.getElementById('f-estilo').value.trim(),
+    aniosTatami: Number(document.getElementById('f-anios').value) || 0,
+    fraseGuerra: document.getElementById('f-frase').value.trim(),
+    stats: {
+      victoriasSumision: Number(document.getElementById('f-stat-sumision').value) || 0,
+      victoriasPuntos: Number(document.getElementById('f-stat-puntos').value) || 0,
+      efectividadPases: Number(document.getElementById('f-stat-pase').value) || 0,
+      defensaGeneral: Number(document.getElementById('f-stat-defensa').value) || 0
+    },
+    puntosRanking: Number(document.getElementById('f-puntos').value) || 0,
+    tendencia: document.getElementById('f-tendencia').value
+  };
+
+  if(!data.nombre){ showToast('El nombre es obligatorio.'); return; }
+
+  if(editing){
+    const idx = STATE.peleadores.findIndex(x=>x.id===fighterId);
+    STATE.peleadores[idx] = data;
+  }else{
+    STATE.peleadores.push(data);
+  }
+  STATE.actualizado = new Date().toISOString().slice(0,10);
+  persist();
+  closeFighterForm();
+  showToast(editing ? 'Peleador actualizado. El ranking se reordenó automáticamente.' : 'Peleador añadido correctamente.');
+
+  if(editing) renderProfile(getFighterById(fighterId));
+  else{ goToRankings(); renderRankings(); }
+}
+
+function deleteFighter(id){
+  if(!isAdmin) return;
+  const f = getFighterById(id);
+  if(!f) return;
+  if(!confirm(`¿Eliminar a ${f.nombre} del ranking? Esta acción no se puede deshacer.`)) return;
+  STATE.peleadores = STATE.peleadores.filter(x=>x.id !== id);
+  STATE.actualizado = new Date().toISOString().slice(0,10);
+  persist();
+  showToast('Peleador eliminado.');
+  goToRankings();
+}
+
+/* ---------------------------------------------------------------
+   EXPORTAR datos.json (solo admin)
+   --------------------------------------------------------------- */
+function exportDatosJson(){
+  if(!isAdmin) return;
+  const payload = JSON.stringify(STATE, null, 2);
+  const blob = new Blob([payload], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = 'datos.json';
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  showToast('datos.json generado. Reemplázalo en el proyecto para publicar los cambios.');
+}
+
+/* ---------------------------------------------------------------
+   INICIO
+   --------------------------------------------------------------- */
+document.getElementById('year').textContent = new Date().getFullYear();
+initLogin();
+</script>
+</body>
+</html>
