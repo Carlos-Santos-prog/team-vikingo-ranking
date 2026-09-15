@@ -339,21 +339,74 @@ main{ min-height:60vh; }
    PERFIL DE ATLETA — "Fighter Card"
    ============================================================ */
 .profile-view{ padding-bottom:70px; }
+
+/* ---------- PROFILE HERO — layout tipo "Fighter Card" UFC (2 columnas) ---------- */
 .profile-hero{
-  position:relative; min-height:440px; display:flex; align-items:flex-end;
-  background:#000; overflow:hidden; border-bottom:2px solid var(--red);
+  position:relative;
+  background:var(--black-void);
+  border-bottom:2px solid var(--red);
+  overflow:hidden;
 }
-.profile-hero .hero-photo{
-  position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:top center;
-  filter:grayscale(25%) contrast(1.05) brightness(0.9);
+.profile-hero-grid{
+  display:grid;
+  grid-template-columns:60% 40%;
+  align-items:end;
+  min-height:560px;
+  gap:12px;
 }
-.profile-hero .hero-photo.placeholder{ filter:none; }
-.profile-hero::before{
-  content:''; position:absolute; inset:0;
-  background:linear-gradient(180deg, rgba(10,10,10,0.10) 0%, rgba(10,10,10,0.55) 55%, rgba(10,10,10,0.97) 100%);
-  z-index:1;
+
+/* -- columna izquierda: toda la info, alineada a la izquierda -- */
+.profile-hero-left{
+  position:relative;
+  z-index:2;
+  padding:96px 0 40px;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  text-align:left;
 }
-.profile-hero-content{ position:relative; z-index:2; width:100%; padding:40px 0 32px; }
+.profile-division{
+  font-size:14px;
+  letter-spacing:1px;
+  color:var(--gray);
+  font-weight:500;
+  margin:2px 0 22px;
+}
+.profile-division strong{ color:var(--white); font-weight:700; }
+
+.profile-record-row{ display:flex; gap:28px; flex-wrap:wrap; }
+.profile-record-item{ display:flex; flex-direction:column; }
+.profile-record-item .v{ font-family:var(--font-display); font-size:34px; line-height:1; color:var(--white); }
+.profile-record-item .v.finishes{ color:var(--red); }
+.profile-record-item .k{ font-size:10px; letter-spacing:1.5px; text-transform:uppercase; color:var(--gray); margin-top:4px; }
+
+/* -- columna derecha: SOLO la foto, ancla abajo-derecha -- */
+.profile-hero-right{
+  position:relative;
+  height:100%;
+  min-height:560px;
+  display:flex;
+  align-items:flex-end;
+  justify-content:flex-end;
+  overflow:hidden;
+}
+.profile-hero-right .hero-photo{
+  display:block;
+  width:100%;
+  max-height:560px;
+  height:100%;
+  object-fit:contain;
+  object-position:bottom right;
+  filter:grayscale(15%) contrast(1.05);
+}
+.profile-hero-right .hero-photo.placeholder{
+  max-height:340px;
+  height:auto;
+  width:auto;
+  margin-right:20px;
+  opacity:0.5;
+}
+
 .back-btn{
   position:absolute; top:20px; left:24px; z-index:5;
   display:inline-flex; align-items:center; gap:8px;
@@ -366,14 +419,14 @@ main{ min-height:60vh; }
 .profile-belt-tag .swatch{ width:22px; height:12px; border-radius:2px; border:1px solid rgba(255,255,255,0.4); }
 .profile-nickname{ font-size:18px; color:var(--red); font-weight:500; margin:0 0 4px; }
 .profile-name{ font-family:var(--font-display); font-size:clamp(36px, 7vw, 70px); line-height:0.92; margin:0 0 14px; letter-spacing:0.5px; }
-.profile-meta-row{ display:flex; flex-wrap:wrap; gap:26px; margin-bottom:8px; }
-.profile-meta-item .k{ font-size:10px; letter-spacing:1.5px; text-transform:uppercase; color:var(--gray); margin:0 0 3px; }
-.profile-meta-item .v{ font-family:var(--font-display); font-size:22px; }
-.profile-meta-item .v .sep{ color:var(--gray-dim); margin:0 3px; }
-.profile-meta-item .v .l{ color:#e05a2a; }
-.profile-meta-item .v .d{ color:var(--gray); }
-.profile-meta-item .v .w{ color:var(--green); }
 .profile-admin-actions{ position:absolute; top:20px; right:24px; z-index:5; display:flex; gap:8px; }
+
+@media (max-width: 860px){
+  .profile-hero-grid{ grid-template-columns:1fr; min-height:auto; }
+  .profile-hero-left{ order:2; padding:24px 0 32px; }
+  .profile-hero-right{ order:1; min-height:320px; justify-content:center; }
+  .profile-hero-right .hero-photo{ max-height:340px; object-position:bottom center; }
+}
 
 /* perfil táctico */
 .tactical-section{ padding:34px 0 10px; }
@@ -480,8 +533,7 @@ main{ min-height:60vh; }
   .rank-line, .rank-line-head{ grid-template-columns:34px 18px 1fr auto; }
   .rank-line .rl-points, .rank-line-head span:nth-child(5){ display:none; }
   .rank-line .rl-nickname{ display:none; }
-  .profile-hero{ min-height:360px; }
-  .profile-meta-row{ gap:16px; }
+  .profile-record-row{ gap:18px; }
 }
 @media (max-width: 460px){
   .container{ padding:0 16px; }
@@ -848,30 +900,33 @@ function renderProfile(f){
 
   view.innerHTML = `
     <div class="profile-hero">
-      <img class="hero-photo ${hasPhoto ? '' : 'placeholder'}" src="${photoSrc(f)}" alt="${escapeHtml(f.nombre)}">
       <a href="#/" class="back-btn">← Rankings</a>
       ${isAdmin ? `
         <div class="profile-admin-actions">
           <button class="btn btn-outline btn-sm" onclick="openFighterForm('${f.id}')">✎ Editar Perfil</button>
           <button class="btn btn-danger btn-sm" onclick="deleteFighter('${f.id}')">🗑 Eliminar</button>
         </div>` : ''}
-      <div class="profile-hero-content">
-        <div class="container">
+
+      <div class="profile-hero-grid container">
+        <div class="profile-hero-left">
           <div class="profile-belt-tag">
             <span class="swatch" style="background:${BELT_COLORS[f.cinturon]}"></span>
             Cinturón ${f.cinturon}
           </div>
           <p class="profile-nickname">"${escapeHtml(f.apodo)}"</p>
           <h1 class="profile-name">${escapeHtml(f.nombre)}</h1>
-          <div class="profile-meta-row">
-            <div class="profile-meta-item"><p class="k">Peso</p><p class="v">${f.peso} kg</p></div>
-            <div class="profile-meta-item"><p class="k">Edad</p><p class="v">${f.edad} años</p></div>
-            <div class="profile-meta-item">
-              <p class="k">Récord (V-D-E)</p>
-              <p class="v"><span class="w">${f.victorias}</span><span class="sep">-</span><span class="l">${f.derrotas}</span><span class="sep">-</span><span class="d">${f.empates}</span></p>
-            </div>
-            <div class="profile-meta-item"><p class="k">Puntos de Ranking</p><p class="v">${Number(f.puntosRanking)||0}</p></div>
+          <p class="profile-division"><strong>${f.peso} kg</strong> · ${f.edad} años · ${Number(f.puntosRanking)||0} pts</p>
+
+          <div class="profile-record-row">
+            <div class="profile-record-item"><span class="v">${f.victorias}</span><span class="k">Victorias</span></div>
+            <div class="profile-record-item"><span class="v">${f.derrotas}</span><span class="k">Derrotas</span></div>
+            <div class="profile-record-item"><span class="v">${f.empates}</span><span class="k">Empates</span></div>
+            <div class="profile-record-item"><span class="v finishes">${f.stats.victoriasSumision}</span><span class="k">Finalizaciones</span></div>
           </div>
+        </div>
+
+        <div class="profile-hero-right">
+          <img class="hero-photo ${hasPhoto ? '' : 'placeholder'}" src="${photoSrc(f)}" alt="${escapeHtml(f.nombre)}">
         </div>
       </div>
     </div>
